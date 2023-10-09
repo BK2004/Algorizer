@@ -1,3 +1,10 @@
-export enum SortingAlgorithms {"Bubble Sort", "Selection Sort", "Insertion Sort", "Merge Sort"}; 
+import { Colors } from "./Colors";
+import { Message } from "./Messages";
 
-export type SortingBlock = { height: number, id: string }
+export enum SortingAlgorithms {"Bubble Sort"}; 
+
+export type SortingAlgorithm = "Bubble Sort";
+
+export type SortingBlock = { height: number, id: string, color: Colors }
+
+export type SortingStep = { data: SortingBlock[], message: Message }
