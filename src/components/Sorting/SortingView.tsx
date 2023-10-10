@@ -61,7 +61,7 @@ const SortingView = () => {
             <input type="range" value={playSpeed} onMouseDown={() => setPlaying(false)} onChange={(e) => setPlaySpeed(Number(e.target.value))} className="border-2 border-white dark:border-neutral-800 appearance-none cursor-pointer bg-white dark:bg-neutral-800 rounded-lg" max={7} min={1}></input>
             <span>Size:</span>
             <input type="range" value={numElements} onMouseDown={() => setPlaying(false)} onChange={(e) => {setNumElements(Number(e.target.value)); setMaxHeight(Number(e.target.value));}} className="border-2 border-white dark:border-neutral-800 appearance-none cursor-pointer bg-white dark:bg-neutral-800 rounded-lg" max={100} min={5}></input>
-            <button className="cursor-pointer bg-transparent underline-offset-2 underline ml-auto">shuffle</button>
+            <button className="cursor-pointer bg-transparent underline-offset-2 underline ml-auto text-blue-500" onClick={() => { setStep(0); setSteps(SortingFactory.generateSteps(algorithm, 1, maxHeight, numElements))}}>shuffle</button>
         </div>
     </div>
 }
