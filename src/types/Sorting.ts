@@ -1,9 +1,9 @@
 import { Colors } from "./Colors";
 import { Message } from "./Messages";
 
-export enum SortingAlgorithms {"Bubble Sort", "Optimized Bubble Sort", "Insertion Sort", "Selection Sort", "Merge Sort"}; 
+export enum SortingAlgorithms {"Bubble Sort", "Optimized Bubble Sort", "Insertion Sort", "Selection Sort", "Merge Sort", "Quick Sort"}; 
 
-export type SortingAlgorithm = "Bubble Sort" | "Optimized Bubble Sort" | "Insertion Sort" | "Selection Sort" | "Merge Sort";
+export type SortingAlgorithm = "Bubble Sort" | "Optimized Bubble Sort" | "Insertion Sort" | "Selection Sort" | "Merge Sort" | "Quick Sort";
 
 export type SortingBlock = { height: number, id: string, color: Colors }
 

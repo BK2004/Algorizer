@@ -34,7 +34,7 @@ const SortingView = () => {
 
                     return old + 1;
                 });
-            }, 500/(playSpeed >= 3 ? 2**(playSpeed - 3) : 1.4**(playSpeed - 3)));
+            }, 500/(playSpeed >= 3 ? 3**(playSpeed - 3) : 1.4**(playSpeed - 3)));
 
             return () => { clearInterval(intervalId); }
         }

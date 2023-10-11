@@ -253,12 +253,76 @@ const generateMergeSteps = (steps: SortingStep[]) => {
     steps[steps.length - 1].message = {content: "Finished", color: Colors.FINISHED};
 }
 
+const partition = (tempStack: number[], steps: SortingStep[], l: number, r: number) => {
+    let pivot = steps[steps.length - 1].data[r].height;
+
+    steps.push(copyLast(steps));
+    clearTempStack(tempStack, steps[steps.length - 1]);
+    steps[steps.length - 1].message = {content: `Partitioning elements ${l} to ${r} with ${r} as pivot`, color: Colors.PARTITION};
+    steps[steps.length - 1].data[r].color = Colors.PARTITION;
+
+    let i = l - 1;
+    for (let j = l; j < r; j++) {
+        steps.push(copyLast(steps));
+        clearTempStack(tempStack, steps[steps.length - 1]);
+        steps[steps.length - 1].data[j].color = Colors.COMPARE;
+        steps[steps.length - 1].message = {content: `Comparing element ${j} to pivot`, color: Colors.COMPARE};
+        tempStack.push(j);
+
+        if (steps[steps.length - 1].data[j].height < pivot) {
+            // move element to i pointer
+            i++;
+            steps.push(copyLast(steps));
+            steps[steps.length - 1].data[i].color = Colors.SWAP;
+            steps[steps.length - 1].data[j].color = Colors.SWAP;
+            steps[steps.length - 1].message = {content: `Element ${j} < pivot, swapping ${j} with ${i}`, color: Colors.SWAP};
+            tempStack.push(i);
+
+            swap(steps[steps.length - 1].data, i, j);
+        }
+    }
+
+    // move pivot to correct location
+    steps.push(copyLast(steps));
+    clearTempStack(tempStack, steps[steps.length - 1]);
+    steps[steps.length - 1].message = {content: `Moving pivot to correct location, swapping ${i + 1} and ${r}`, color: Colors.SWAP};
+    steps[steps.length - 1].data[r].color = Colors.SWAP;
+    steps[steps.length - 1].data[i + 1].color = Colors.SWAP;
+    tempStack.push(i + 1);
+    tempStack.push(r);
+    swap(steps[steps.length - 1].data, i + 1, r);
+
+    return i + 1;
+}
+
+const quicksort = (tempStack: number[], steps: SortingStep[], l: number, r: number) => {
+    if (l >= r) return;
+
+    const pIdx: number = partition(tempStack, steps, l, r);
+
+    // recursive calls to left and right halves
+    quicksort(tempStack, steps, l, pIdx - 1);
+    quicksort(tempStack, steps, pIdx + 1, r);
+}
+
+const generateQuickSteps = (steps: SortingStep[]) => {
+    const tempStack: number[] = [];
+
+    quicksort(tempStack, steps, 0, steps[0].data.length - 1);
+
+    // finished, add as step
+    steps.push(copyLast(steps));
+    steps[steps.length - 1].message = {content: "Finished", color: Colors.FINISHED};
+    steps[steps.length - 1].data.forEach((b) => b.color = Colors.FINISHED);
+}
+
 const algorithmGenerators: {[name in SortingAlgorithms]: (steps: SortingStep[]) => void} = {
     0: generateBubbleSteps,
     1: generateOptimizedBubbleSteps,
     2: generateInsertionSteps,
     3: generateSelectionSteps,
-    4: generateMergeSteps
+    4: generateMergeSteps,
+    5: generateQuickSteps
 }
 
 const generateHeights = (min: number, max: number, numElements: number) => {
