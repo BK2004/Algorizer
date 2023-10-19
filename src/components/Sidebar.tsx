@@ -1,5 +1,6 @@
 const Routes: { [name: string]: string } = {
     "Sorting": "/sorting",
+    "Pathfinding": "/pathfinding",
 }
 
 const Sidebar = ({ visible }: { visible: boolean }) => {
