@@ -1,7 +1,7 @@
 {
   "name": "algorizer",
   "version": "0.1.0",
-  "homepage": "https://bk2004.github.io/sortifier",
+  "homepage": "bk2004.github.io/Sortifier",
   "private": true,
   "dependencies": {
     "@fontsource/noto-sans": "^5.0.12",
