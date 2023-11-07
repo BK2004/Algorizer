@@ -6,9 +6,6 @@ export enum Colors {
     FINISHED,
     EARLY_EXIT,
     MAXIMUM,
-    START,
-    TARGET,
-    WALL,
 }
 
 export type ColorMap = {[color in Colors]: string};
@@ -21,9 +18,6 @@ export const BackgroundColorMap: ColorMap = {
     4: "bg-blue-400",
     5: "bg-yellow-500",
     6: "bg-yellow-500",
-    7: "bg-green-500",
-    8: "bg-red-500",
-    9: "bg-purple-700",
 }
 
 export const TextColorMap: ColorMap = {
@@ -34,9 +28,6 @@ export const TextColorMap: ColorMap = {
     4: "text-blue-400",
     5: "text-yellow-500",
     6: "text-yellow-500",
-    7: "text-green-500",
-    8: "text-red-500",
-    9: "text-purple-700",
 }
 
 export const BorderColorMap: ColorMap = {
@@ -47,7 +38,4 @@ export const BorderColorMap: ColorMap = {
     4: "border-blue-400",
     5: "border-yellow-500",
     6: "border-yellow-500",
-    7: "border-green-500",
-    8: "border-red-500",
-    9: "border-purple-700",
 }
